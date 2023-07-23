@@ -26,8 +26,7 @@ async function httpCreateTodo(req, res) {
     return res.status(500).json({message: error.message});
   }
 }
-
-async function httpDeleteTodo(req, res) {
+const  httpDeleteTodo=async(req, res)=> {
   const userId = req.user._id;
   const todoId = req.body._id;
 
