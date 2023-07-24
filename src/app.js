@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 const cors = require("cors");
 const path = require("path");
 const helmet = require("helmet");
@@ -25,6 +24,7 @@ app.use(
   cors({
     credentials: true,
     origin: [process.env.REACT_APP_BASE_URL],
+    // origin: ["http://localhost:3000"],
     exposedHeaders: ["set-cookie"],
   })
 );
