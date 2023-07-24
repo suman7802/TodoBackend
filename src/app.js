@@ -15,11 +15,6 @@ const validateToken = require("./middleware/validateToken");
 const app = express();
 
 app.use(helmet());
-app.use(parser.urlencoded({extended: true}));
-app.use(express.json());
-app.use(cookieParser());
-app.use(morgan("dev"));
-
 app.use(
   cors({
     credentials: true,
@@ -29,8 +24,15 @@ app.use(
   })
 );
 
+app.use(morgan("dev"));
+
+app.use(express.json());
+app.use(parser.urlencoded({extended: true}));
+app.use(cookieParser());
+
 app.use("/api/user", userRouter);
 app.use("/api/todo", validateToken, todoRouter);
+
 app.use(express.static(path.join(__dirname, "build")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
