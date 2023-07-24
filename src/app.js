@@ -1,11 +1,12 @@
 require("dotenv").config();
 
 const cors = require("cors");
+const path = require("path");
+const helmet = require("helmet");
+const morgan = require("morgan");
 const express = require("express");
 const parser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const morgan = require("morgan");
-const path = require("path");
 
 const connectDB = require("./database/db");
 const userRouter = require("./routes/user.route");
@@ -14,6 +15,7 @@ const validateToken = require("./middleware/validateToken");
 
 const app = express();
 
+app.use(helmet());
 app.use(parser.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cookieParser());
