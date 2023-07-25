@@ -11,7 +11,7 @@ async function httpRegistration(req, res) {
   const {email, password, conformPassword} = req.body;
   const user = await checkExistingUser(email);
   if (user) {
-    console.log(`here`)
+    console.log(`here`);
     return res.status(400).json({message: "User already exists"});
   }
   if (password !== conformPassword)
@@ -46,6 +46,7 @@ async function httpLogin(req, res) {
       .cookie("access-token-01", token, {
         secure: false,
         Path: "*",
+        maxAge: 604800000,
       })
       .status(200)
       .json({message: "Login successful"});
